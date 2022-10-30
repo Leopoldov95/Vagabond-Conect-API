@@ -10,7 +10,7 @@ import {
   deleteComment,
   editComment,
 } from "../controllers/posts";
-import auth from "../middleware/auth";
+import { auth } from "../middleware/auth";
 const router = express.Router();
 
 router.get("/:params?", getAllPosts); // retrieves all posts with optional filters

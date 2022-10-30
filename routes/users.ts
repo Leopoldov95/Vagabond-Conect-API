@@ -14,7 +14,7 @@ import {
   fetchAllFollowers,
   fetchAllFollowing,
 } from "../controllers/users";
-import auth from "../middleware/auth";
+import { auth } from "../middleware/auth";
 const router = express.Router();
 
 router.post("/", auth, editUserDetails);
