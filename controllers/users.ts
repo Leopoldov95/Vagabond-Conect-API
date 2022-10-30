@@ -4,7 +4,10 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { Request, Response } from "express";
-const { uploadCloudinary, deleteCloudinaryImg } = require("./cloudinaryHelper");
+const {
+  uploadCloudinary,
+  deleteCloudinaryImg,
+} = require("./cloudinaryHelper.js");
 const { updateUsersPosts } = require("./helper");
 
 const ignore = {
