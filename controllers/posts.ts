@@ -3,11 +3,7 @@ import Posts from "../models/posts";
 import Users from "../models/users";
 import { Request, Response } from "express";
 import { checkUserComments } from "./helper";
-
-const {
-  uploadCloudinary,
-  deleteCloudinaryImg,
-} = require("./cloudinaryHelper.js");
+import { uploadCloudinary, deleteCloudinaryImg } from "./cloudinaryHelper";
 
 // fetch users posts only
 export const getUsersPosts = async (req: Request, res: Response) => {

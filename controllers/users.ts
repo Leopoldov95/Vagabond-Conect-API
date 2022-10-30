@@ -4,11 +4,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { Request, Response } from "express";
-const {
-  uploadCloudinary,
-  deleteCloudinaryImg,
-} = require("./cloudinaryHelper.js");
-const { updateUsersPosts } = require("./helper");
+import { uploadCloudinary, deleteCloudinaryImg } from "./cloudinaryHelper";
+import { updateUsersPosts } from "./helper";
 
 const ignore = {
   country: 0,
