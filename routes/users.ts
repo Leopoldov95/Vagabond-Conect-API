@@ -13,6 +13,8 @@ import {
   deleteUser,
   fetchAllFollowers,
   fetchAllFollowing,
+  clearNotifications,
+  updateMessageNotification,
 } from "../controllers/users";
 import { auth } from "../middleware/auth";
 const router = express.Router();
@@ -30,5 +32,11 @@ router.post("/signin", signin);
 router.get("/comment/:id", fetchUserCommentInfo);
 router.patch("/:id/profileImg", auth, editProfileImg);
 router.patch("/list/:name", auth, editUserCountryList);
+router.patch("/patch/clearNotification/:id", auth, clearNotifications);
+router.patch(
+  "/patch/updateMessageNotification/:id",
+  auth,
+  updateMessageNotification
+);
 
 export default router;
