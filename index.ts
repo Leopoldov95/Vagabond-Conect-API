@@ -52,10 +52,10 @@ const server = app.listen(PORT, async () => {
 const io = socket(server, {
   pingTimeout: 60000,
   cors: {
-    origin: originURL, // where we want socket io to listen to
-    credentials: true,
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    allowedHeaders: ["vagabond-header"],
+    origin: "*", // where we want socket io to listen to
+    // credentials: true,
+    // methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    // allowedHeaders: ["vagabond-header"],
   },
 });
 
