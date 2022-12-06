@@ -54,7 +54,7 @@ const io = socket(server, {
   cors: {
     origin: "*", // where we want socket io to listen to
     // credentials: true,
-    // methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     // allowedHeaders: ["vagabond-header"],
   },
 });
