@@ -55,9 +55,9 @@ const io = socket(server, {
     origin: "*", // where we want socket io to listen to
     // credentials: true,
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    transports: ["websocket", "polling"],
     // allowedHeaders: ["vagabond-header"],
   },
+  transports: ["websocket", "polling"],
   allowEIO3: true,
 });
 
