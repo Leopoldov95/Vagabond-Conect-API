@@ -57,7 +57,7 @@ const io = socket(server, {
     methods: ["PUT", "GET", "PATCH", "POST", "DELETE", "OPTIONS"],
     credentials: false,
   },
-  transports: ["websocket", "polling"],
+  transports: ["polling"],
 });
 //   , {
 //   pingTimeout: 60000,
