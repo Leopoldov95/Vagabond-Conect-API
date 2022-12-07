@@ -18,8 +18,12 @@ const socket = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 dotenv.config();
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "30mb" }));
 
@@ -50,7 +54,10 @@ mongoose
 const io = socket(server, {
   cors: {
     origin: "*",
+    methods: ["PUT", "GET", "PATCH", "POST", "DELETE", "OPTIONS"],
+    credentials: false,
   },
+  transports: ["websocket", "polling"],
 });
 //   , {
 //   pingTimeout: 60000,
@@ -84,7 +91,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, async () => {
+server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
