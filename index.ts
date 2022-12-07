@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose, { ConnectOptions } from "mongoose";
 import cors from "cors";
+import http from "http";
 import dotenv from "dotenv";
 import userRoutes from "./routes/users";
 import postsRoutes from "./routes/posts";
@@ -12,12 +13,13 @@ import {
   typingNotification,
 } from "./socket";
 
-const originURL = "https://vagabondconnect.netlify.app/";
+//const originURL = "https://vagabondconnect.netlify.app/";
 const socket = require("socket.io");
 const app = express();
+const server = http.createServer(app);
 dotenv.config();
-app.use(cors());
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "30mb" }));
 
@@ -44,22 +46,23 @@ mongoose
     console.log(err.message);
   });
 
-const server = app.listen(PORT, async () => {
-  console.log(`Listening on port ${PORT}`);
-});
-
 // // so socket.io is INDEPENDANT of Mongodb and operates without it, it only tracks changes from the data it recieves DIRECTLY from the frontend and not from any mongodb databse...
 const io = socket(server, {
-  pingTimeout: 60000,
   cors: {
-    origin: "*", // where we want socket io to listen to
-    // credentials: true,
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    // allowedHeaders: ["vagabond-header"],
+    origin: "*",
   },
-  transports: ["websocket", "polling"],
-  allowEIO3: true,
 });
+//   , {
+//   pingTimeout: 60000,
+//   cors: {
+//     origin: "*", // where we want socket io to listen to
+//     // credentials: true,
+//     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+//     // allowedHeaders: ["vagabond-header"],
+//   },
+//   transports: ["websocket", "polling"],
+//   allowEIO3: true,
+// });
 
 // "connection" is the listener to use when anyone visites our website
 io.on("connection", (socket) => {
@@ -79,6 +82,10 @@ io.on("connection", (socket) => {
     removeUser(socket.id);
     console.log(`${socket.id} has left the session`);
   });
+});
+
+server.listen(PORT, async () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 // DEPRECATE - keep as a reference
