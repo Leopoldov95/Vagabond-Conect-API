@@ -31,21 +31,25 @@ export const fetchAllContacts = async (req: any, res: Response) => {
         const existingRoom: any = await Messages.findById(room);
         const targetUser = existingRoom.users.filter((user) => user !== _id); // exclude current user from result
 
-        const { profile_cloudinary, firstName, lastName } =
-          await Users.findById(targetUser);
-        let tempObj: userObj = {
-          _id: targetUser[0],
-          messageRoom: room,
-          profile_cloudinary: profile_cloudinary,
-          firstName: firstName,
-          lastName: lastName,
-        };
-        contactList.push(tempObj);
+        // check if target user exists
+        const targetUsersExists = await Users.findById(targetUser);
+        if (targetUsersExists) {
+          const { profile_cloudinary, firstName, lastName } = targetUsersExists;
+          let tempObj: userObj = {
+            _id: targetUser[0],
+            messageRoom: room,
+            profile_cloudinary: profile_cloudinary,
+            firstName: firstName,
+            lastName: lastName,
+          };
+          contactList.push(tempObj);
+        }
       }
     }
     return res.status(200).json(contactList);
     // make sure on the frontend that the first index user is automatically selected and that message thread called and applied
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
