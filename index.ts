@@ -13,7 +13,6 @@ import {
   typingNotification,
 } from "./socket";
 
-//const originURL = "https://vagabondconnect.netlify.app/";
 const socket = require("socket.io");
 const app = express();
 const server = http.createServer(app);
@@ -59,17 +58,6 @@ const io = socket(server, {
   },
   transports: ["polling"],
 });
-//   , {
-//   pingTimeout: 60000,
-//   cors: {
-//     origin: "*", // where we want socket io to listen to
-//     // credentials: true,
-//     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-//     // allowedHeaders: ["vagabond-header"],
-//   },
-//   transports: ["websocket", "polling"],
-//   allowEIO3: true,
-// });
 
 // "connection" is the listener to use when anyone visites our website
 io.on("connection", (socket) => {
@@ -94,29 +82,3 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
-
-// DEPRECATE - keep as a reference
-
-/* 
-// should we always connect the two or only one once a user is online?
-  socket.on("setup", (userId) => {
-    socket.join(userId); // apparently this is an arbitrary value, might need need target message db id
-    console.log(userId);
-    socket.emit("connected");
-  });
-  // joins the chat
-  socket.on("join room", (roomId) => {
-    console.log(`User has joined room:  ${roomId}`);
-  });
-  // listends to new messages
-  socket.on("new message", (newMessageRecieved) => {
-    let chat = newMessageRecieved;
-    // may want to add a checker if there are valid users
-    chat.users.forEach((userId) => {
-      // If I sent the message, no need to emit on my end
-      if (userId === newMessageRecieved.createdBy) return;
-      socket.in(userId).emit("message Recieved", newMessageRecieved);
-    });
-  });
-
-*/

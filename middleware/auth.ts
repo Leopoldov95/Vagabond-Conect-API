@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 // so what next() does, if a user clicks the like button for a post, we need to see if they are logged in or not. If they are logged in, they can proceed with the like, othewise, that action cannot be completed
 
 const auth = async (req, res, next) => {
-  console.log("hello from auth middleware");
   try {
     // check if user is who they're claming to be
     /////////////// var names here MUST BE IN LOWERCASE!!!!!!!!!//////////////////
